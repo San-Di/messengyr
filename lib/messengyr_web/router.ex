@@ -17,6 +17,7 @@ defmodule MessengyrWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/test", PageController, :say_hello
   end
 
   # Other scopes may use custom stacks.
