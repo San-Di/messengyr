@@ -17,7 +17,8 @@ defmodule MessengyrWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/test", PageController, :say_hello
+    get "/signup", PageController, :signup # :signup atom refers to web/templates/page/signup.html.eex
+    get "/login", PageController, :login
   end
 
   # Other scopes may use custom stacks.
