@@ -1,13 +1,17 @@
-defmodule Messengyr.User do
+defmodule Messengyr.Accounts.User do
+  @moduledoc """
+  
+  """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Messengyr.User
+  alias Messengyr.Accounts.User
 
 
   schema "users" do
+    field :username, :string, unique: true
     field :email, :string, unique: true
     field :encrypted_password, :string
-    field :username, :string, unique: true
+    field :password, :string, virtual: true 
 
     timestamps()
   end
