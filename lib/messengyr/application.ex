@@ -1,5 +1,9 @@
 defmodule Messengyr.Application do
+  @moduledoc """
+  
+  """
   use Application
+  alias MessengyrWeb.Endpoint
 
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
@@ -12,7 +16,8 @@ defmodule Messengyr.Application do
       supervisor(Messengyr.Repo, []),
       # Start the endpoint when the application starts
       supervisor(MessengyrWeb.Endpoint, []),
-      # Start your own worker by calling: Messengyr.Worker.start_link(arg1, arg2, arg3)
+      # Start your own worker by calling:
+      # Messengyr.Worker.start_link(arg1, arg2, arg3)
       # worker(Messengyr.Worker, [arg1, arg2, arg3]),
     ]
 
@@ -25,7 +30,7 @@ defmodule Messengyr.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    MessengyrWeb.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end
