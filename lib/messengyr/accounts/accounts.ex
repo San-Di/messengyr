@@ -14,7 +14,7 @@ defmodule Messengyr.Accounts do
     """
 
     def create_user(params) do
-    
+
         # # Create a user struct:
         # user = %User{}
 
@@ -24,7 +24,7 @@ defmodule Messengyr.Accounts do
 
         # # Return the changeset
         # user_changeset
-        
+
         # %User{}
         # |> change(%{username: params.username})
         # |> validate_required(:email)
@@ -33,11 +33,19 @@ defmodule Messengyr.Accounts do
         # |> cast(params, [:username, :email, :password])
         # |> validate_required(:email)
 
+        # %User{}
+        # |> cast(params, [:username, :email, :password])
+        # |> validate_required([:username, :email, :password])
+        # |> Repo.insert
+        params
+        |> register_changeset
+        |> Repo.insert
+    end
+
+    def register_changeset(params \\ %{}) do
         %User{}
         |> cast(params, [:username, :email, :password])
         |> validate_required([:username, :email, :password])
-        |> Repo.insert
-
     end
 
 end
