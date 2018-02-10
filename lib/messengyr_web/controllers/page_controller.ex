@@ -21,11 +21,12 @@ defmodule MessengyrWeb.PageController do
   end
 
   def create_user(conn, %{"user" => user_params}) do
-    IO.puts "Create user!"
-    IO.inspect user_params
-
-    Accounts.create_user(user_params)
-    |> IO.inspect
+    case Accounts.create_user(user_params) do
+    {:ok, _user} ->
+      IO.puts "It worked!"
+    {:error, user_changeset} ->
+      IO.puts "It failed!"
+    end
   end
 
 end
