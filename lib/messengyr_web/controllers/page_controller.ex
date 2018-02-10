@@ -20,8 +20,12 @@ defmodule MessengyrWeb.PageController do
     render conn, user_changeset: changeset
   end
 
-  def create_user(conn, params) do
+  def create_user(conn, %{"user" => user_params}) do
     IO.puts "Create user!"
+    IO.inspect user_params
+
+    Accounts.create_user(user_params)
+    |> IO.inspect
   end
 
 end
