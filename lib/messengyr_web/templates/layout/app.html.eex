@@ -16,26 +16,9 @@
     
     <body class=<%= @conn.path_info %>>
       <div class="container">
-        <header>
 
-          <%= link "", class: "logo", to: page_path(@conn, :index) %>
-
-          <%= link "Log in", to: page_path(@conn, :login) %>
-          <%# # The first parameter is the text that we want to show inside the a-tag  %>
-          <%# # (for the login-link, it's just "Log in"), and in the :to-option you first specify  %>
-          <%# # the path type (page_path will look up our page_controller),  %>
-          <%# # and then the route as an atom (e.g. :login). %>
-        </header>
-
-      <%# <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header> %>
-
+      <%= render MessengyrWeb.LayoutView, "header.html", assigns %>
+      
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
