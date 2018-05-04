@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import ChatContainer from "./components/chat-container";
+import MenuContainer from "./components/menu-container";
+
 class App extends React.Component {
     render() {
+
+        
+
         return (
             <div>
-                Hello world!
+                <MenuContainer />
+                <ChatContainer />
             </div>
         )
     }
 }
 
-ReactDOM.render(<App/>,document.getElementById('app'));
+ReactDOM.render(
+    <App />,
+    document.getElementById('app'),
+);
