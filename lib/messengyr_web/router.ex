@@ -9,18 +9,23 @@ defmodule MessengyrWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :browser_session do
+    plug Messengyr.Auth.Pipeline
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", MessengyrWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_session]
 
     get "/", PageController, :index
     get "/signup", PageController, :signup
     # :signup atom refers to web/templates/page/signup.html.eex
     get "/login", PageController, :login
     post "/signup", PageController, :create_user
+    post "/login", PageController, :login_user
   end
 
   # Other scopes may use custom stacks.
