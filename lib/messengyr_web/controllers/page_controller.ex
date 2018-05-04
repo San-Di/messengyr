@@ -3,13 +3,12 @@ defmodule MessengyrWeb.PageController do
   alias Messengyr.Accounts
   alias Messengyr.Accounts.Session
   alias Messengyr.Auth.Guardian
+  alias Guardian.Plug
 
   def index(conn, _params) do
-    # Add these 2 lines:
-    user = Guardian.Plug.current_resource(conn)
-    IO.inspect user
+    changeset = Accounts.register_changeset()
 
-    render conn
+    render conn, user_changeset: changeset
   end
 
   def login(conn, _params) do
@@ -43,7 +42,7 @@ defmodule MessengyrWeb.PageController do
     case Session.authenticate(credentials) do
       {:ok, %{username: username} = user} ->
         conn
-        |> Guardian.Plug.sign_in(user)
+        |> Plug.sign_in(user)
         |> put_flash(:info, "Logged in as #{username}!")
         |> render("login.html")
 
@@ -52,6 +51,13 @@ defmodule MessengyrWeb.PageController do
         |> put_flash(:error, message)
         |> render("login.html")
     end
+  end
+
+  def logout(conn, _params) do
+    conn
+    |> Plug.sign_out
+    |> put_flash(:info, "Signed out successfully!")
+    |> redirect(to: "/")
   end
 
 end
