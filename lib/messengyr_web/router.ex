@@ -11,6 +11,8 @@ defmodule MessengyrWeb.Router do
 
   pipeline :browser_session do
     plug Messengyr.Auth.Pipeline
+    plug Guardian.Plug.Pipeline, module: Messengyr.Guardian,
+                             error_handler: MessengyrWeb.ChatController
   end
 
   pipeline :api do
