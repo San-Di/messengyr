@@ -13,32 +13,12 @@ defmodule Messengyr.Accounts do
 
     """
 
-    def create_user(params) do
+    def create_user(%{"password" => password} = params) do
 
-        # # Create a user struct:
-        # user = %User{}
+        encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
 
-        # # Create the changeset and do some validation:
-        # user_changeset = change(user, %{username: params.username})
-        # user_changeset = validate_required(user_changeset, :email)
-
-        # # Return the changeset
-        # user_changeset
-
-        # %User{}
-        # |> change(%{username: params.username})
-        # |> validate_required(:email)
-
-        # %User{}
-        # |> cast(params, [:username, :email, :password])
-        # |> validate_required(:email)
-
-        # %User{}
-        # |> cast(params, [:username, :email, :password])
-        # |> validate_required([:username, :email, :password])
-        # |> Repo.insert
-        params
-        |> register_changeset
+        register_changeset(params)
+        |> put_change(:encrypted_password, encrypted_password)
         |> Repo.insert
     end
 
@@ -46,6 +26,11 @@ defmodule Messengyr.Accounts do
         %User{}
         |> cast(params, [:username, :email, :password])
         |> validate_required([:username, :email, :password])
+        |> unique_constraint(:email)
+        |> unique_constraint(:username)
+        |> validate_format(:email, ~r/@/)
+        |> validate_format(:username, ~r/^[a-zA-Z0-9]*$/)
+        |> validate_length(:password, min: 4)
     end
 
 end
