@@ -37,6 +37,7 @@ defmodule MessengyrWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, only: [:show]
+    resources "/rooms", RoomController
   end
 
 end
