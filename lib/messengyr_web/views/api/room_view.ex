@@ -1,5 +1,6 @@
 defmodule MessengyrWeb.RoomView do
     use MessengyrWeb, :view
+    import MessengyrWeb.MessageView, only: [message_json: 1]
 
     def render("index.json", %{rooms: rooms}) do
         %{
@@ -8,8 +9,10 @@ defmodule MessengyrWeb.RoomView do
     end
 
     defp room_json(room) do
+        IO.inspect room.messages
         %{
             id: room.id,
+            messages: Enum.map(room.messages, fn(message) -> message_json(message) end),
         }
     end
 
