@@ -3,6 +3,8 @@ defmodule MessengyrWeb.UserController do
 
     alias Messengyr.Accounts
 
+    action_fallback MessengyrWeb.FallbackController
+
     def show(conn, %{"id" => user_id}) do
       user = Accounts.get_user(user_id)
 
