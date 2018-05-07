@@ -5,6 +5,7 @@ defmodule Messengyr.Accounts do
     import Ecto.Changeset
     alias Messengyr.Accounts.User
     alias Messengyr.Repo
+    alias Comeonin.Bcrypt
 
     @doc """
     
@@ -15,7 +16,7 @@ defmodule Messengyr.Accounts do
 
     def create_user(%{"password" => password} = params) do
 
-        encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
+        encrypted_password = Bcrypt.hashpwsalt(password)
 
         register_changeset(params)
         |> put_change(:encrypted_password, encrypted_password)
@@ -31,6 +32,10 @@ defmodule Messengyr.Accounts do
         |> validate_format(:email, ~r/@/)
         |> validate_format(:username, ~r/^[a-zA-Z0-9]*$/)
         |> validate_length(:password, min: 4)
+    end
+
+    def get_user(user_id) do
+        Repo.get(User, user_id)
     end
 
 end
