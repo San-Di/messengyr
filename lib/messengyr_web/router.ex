@@ -17,6 +17,8 @@ defmodule MessengyrWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug Messengyr.Auth.Pipeline
   end
 
   scope "/", MessengyrWeb do
