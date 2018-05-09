@@ -9,6 +9,15 @@ import DATA from './fake-data';
 
 class App extends React.Component {
 
+    constructor() {
+        super();
+        
+        this.state = {
+            rooms: [],
+            messages: [],
+        };
+    }
+
     componentDidMount() {
         fetch('/api/rooms', {
             headers: {
@@ -19,7 +28,12 @@ class App extends React.Component {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
+            let rooms = response.rooms;
+
+            this.setState({
+                rooms: rooms,
+                messages: rooms[0].messages,
+            });
         })
         .catch((err) => {
           console.error(err);
@@ -34,10 +48,10 @@ class App extends React.Component {
         return (
             <div>
                 <MenuContainer 
-                    rooms={ROOMS}
+                    rooms={this.state.rooms}
                 />
                 <ChatContainer 
-                    messages={MESSAGES}
+                    messages={this.state.messages}
                 />
             </div>
         )

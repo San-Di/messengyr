@@ -11,7 +11,7 @@ class MenuMessage extends React.Component {
 
         return (
             <li>
-                <img className="avatar" />
+                <img className="avatar" src={counterpart.avatarURL} />
                 <div className="profile-container">
                     <p className="name">{counterpart.username}</p>
 
