@@ -5,10 +5,13 @@ defmodule MessengyrWeb.MessageView do
         %{
             id: message.id,
             text: message.text,
+            outgoing: outgoing?(message, me),
             sentAt: message.inserted_at,
         }
     end
 
+    defp outgoing?(message, me) do
+        message.user_id == message.id
+    end
+    
 end
-
-
