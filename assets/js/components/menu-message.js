@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import moment from 'moment';
 class MenuMessage extends React.Component {
     render() {
         let room = this.props.room;
         let counterpart = room.counterpart;
 
         let lastMessage = room.messages.slice(-1)[0];
-        let sentAt = lastMessage.sentAt;
+        let sentAt = moment.utc(lastMessage.sentAt).fromNow();
 
         return (
             <li>
