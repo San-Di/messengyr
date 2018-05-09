@@ -10,7 +10,11 @@ import DATA from './fake-data';
 class App extends React.Component {
 
     componentDidMount() {
-        fetch('/api/rooms')
+        fetch('/api/rooms', {
+            headers: {
+                "Authorization": "Bearer " + window.jwtToken,
+            },
+        })
         .then((response) => {
           return response.json();
         })
