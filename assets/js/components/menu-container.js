@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import MenuMessage from './menu-message';
 
+import {connect} from 'react-redux';
+
 class MenuContainer extends React.Component {
     render() {
         let rooms = this.props.rooms.map((room) => {
@@ -35,4 +37,14 @@ MenuContainer.defaultProps = {
     room: [],
 };
 
-export default MenuContainer
+const mapStateToProps = (state) => {
+    return {
+        rooms: state,
+    };
+};
+
+MenuContainer = connect(
+    mapStateToProps,
+)(MenuContainer);
+
+export default MenuContainer;
