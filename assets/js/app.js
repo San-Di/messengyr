@@ -10,8 +10,9 @@ import MenuContainer from "./components/menu-container";
 
 import DATA from './fake-data';
 
-const rooms = () => {
-    return DATA.rooms;
+const rooms = (state, action) => {
+  console.log(state, action);
+  return DATA.rooms;
 };
 
 const store = createStore(rooms);
